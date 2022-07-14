@@ -45,14 +45,18 @@ module.exports = function (config) {
     config.outgoingPort ||
     config.outgoingUser ||
     config.outgoingPass ||
-    config.outgoingSecure
+    config.outgoingSecure ||
+    config.outgoingIgnoreTLS ||
+    config.outgoingRequireTLS
   ) {
     mailserver.setupOutgoing(
       config.outgoingHost,
       parseInt(config.outgoingPort),
       config.outgoingUser,
       config.outgoingPass,
-      config.outgoingSecure
+      config.outgoingSecure,
+      config.outgoingIgnoreTLS,
+      config.outgoingRequireTLS
     )
   }
 
