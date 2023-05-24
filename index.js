@@ -1,4 +1,3 @@
-
 /**
  * MailDev - index.js
  *
@@ -11,23 +10,19 @@ const async = require('async')
 const pkg = require('./package.json')
 const web = require('./lib/web')
 const mailserver = require('./lib/mailserver')
-const logger = require('./lib/logger')
+const { createLogger, getLogger } = require('./lib/logger')
 const { options, appendOptions } = require('./lib/options')
 
 module.exports = function (config) {
   const version = pkg.version
+  createLogger(config.loggerProvider);
+  const logger = getLogger();
 
   if (!config) {
     // CLI
     config = appendOptions(program.version(version).allowUnknownOption(true), options)
       .parse(process.argv)
       .opts()
-  }
-
-  if (config.verbose) {
-    logger.setLevel(2)
-  } else if (config.silent) {
-    logger.setLevel(0)
   }
 
   // Start the Mailserver
