@@ -10,13 +10,12 @@ const async = require('async')
 const pkg = require('./package.json')
 const web = require('./lib/web')
 const mailserver = require('./lib/mailserver')
-const { createLogger, getLogger } = require('./lib/logger')
+const { createLogger } = require('./lib/logger')
 const { options, appendOptions } = require('./lib/options')
 
 module.exports = function (config) {
   const version = pkg.version
-  createLogger(config.loggerProvider);
-  const logger = getLogger();
+  const logger = createLogger(config.loggerProvider);
 
   if (!config) {
     // CLI
